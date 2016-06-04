@@ -12,3 +12,9 @@ Uefi image created using this helper was tested on Asrock B75M-GL motherboard fi
 The helper header is for now only required for "test1.c".
 
 Test1 (test1.c) will accept a single command parameter naming a binary file will be used to create a simple EFI image with it's content as single executable section. 
+
+Dependencies:
+
+C standard libraries.
+VLA, VM extensions.
+__typeof__ extension (for test1).
