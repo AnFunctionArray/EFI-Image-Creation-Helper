@@ -202,7 +202,10 @@ typedef struct
 	size_t szSector;
 	uint8_t (*pSectorData)[];
 	
-	uint8_t Name[8];
+	union {
+		struct { uint8_t _[8]; } sName;
+		uint8_t Name[8];
+	};
 	uint32_t VirtualSize;
 	
 	uint32_t VirtualAddress;
@@ -217,4 +220,3 @@ extern bool WriteFile(const char (*pFileName)[], /*null-terminated*/
 				SectorDesc (*pSectorsToBeAdded)[szAmountSectors],
 				ImageDataDir (*pDataDirs)[szAmountDataDirs],
 				size_t szImage);
-
