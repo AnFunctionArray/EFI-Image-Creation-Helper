@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 
-int main()
+int (main)()
 {
 	//Creates EFI image with name test.o
 	//1 sector at VA 0 with size 0x400 beginning with "SEGBGIN"
