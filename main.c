@@ -6,18 +6,18 @@
 
 static COFFHead dCoffHeadTemplate = {.Machine = EFI_IMAGE_MACHINE_x64, .SizeOfOptionalHeader = 	sizeof(COFFOptionalHead), .Characteristics = IMAGE_FILE_EXECUTABLE_IMAGE };
 
-static COFFOptionalHead dCoffOptionalHeadTempl = {.Magic = COFFMagic, .dWindowSpecific.FileAlignment = 1,
+static COFFOptionalHead dCoffOptionalHeadTempl = {.Magic = M_COFFMagic, .dWindowSpecific.FileAlignment = 1,
 
 	.dWindowSpecific.SectionAlignment = 1, .dWindowSpecific.Subsystem = EFI_IMAGE_SUBSYSTEM_EFI_APPLICATION};
 
-static size_t const szMSDOStillPEPadding = 0x10;
+#define M_szMSDOStillPEPadding 0x10
 
-static const size_t szBytesTillDataDirs = pCOFFHeadOffset + sizeof(uint32_t) + szMSDOStillPEPadding + sizeof(COFFsign) + sizeof(COFFHead) + sizeof(COFFOptionalHead);
+static const size_t szBytesTillDataDirs = M_pCOFFHeadOffset + sizeof(uint32_t) + M_szMSDOStillPEPadding + sizeof(COFFsign) + sizeof(COFFHead) + sizeof(COFFOptionalHead);
 
 static ImageSectionHeader dSectHeadTempl;
 
 
-static inline void allign(size_t *pszWhat, const size_t szAlligment) //unused IRC
+static inline void allign(size_t *pszWhat, const size_t szAlligment) //unused
 {
 	const size_t tmp = *pszWhat % szAlligment;
 	
@@ -36,13 +36,13 @@ extern bool WriteFile(const char (*pFileName)[], /*null-terminated*/
 
 	fwrite(MZDosSign, sizeof(MZDosSign), 1, pFile),
 	
-	fseek(pFile, pCOFFHeadOffset, SEEK_SET),
+	fseek(pFile, M_pCOFFHeadOffset, SEEK_SET),
 	
 	//uint32_t tmp_0 = pCOFFHeadOffset + sizeof(uint32_t);
 	
-	fwrite((uint32_t[1]){pCOFFHeadOffset + sizeof(uint32_t) + szMSDOStillPEPadding}, sizeof(uint32_t), 1, pFile),
+	fwrite((uint32_t[1]){M_pCOFFHeadOffset + sizeof(uint32_t) + M_szMSDOStillPEPadding}, sizeof(uint32_t), 1, pFile),
 
-	fseek(pFile, szMSDOStillPEPadding, SEEK_CUR),
+	fseek(pFile, M_szMSDOStillPEPadding, SEEK_CUR),
 	
 	fwrite(COFFsign, sizeof(COFFsign), 1, pFile),
 
