@@ -7,3 +7,8 @@ You will need to include/compile "main.c" in your project in order to work. "mai
 you will want to use.
 
 Uefi image created using this helper was tested on Asrock B75M-GL motherboard firmware.
+
+
+The helper header is for now only required for "test1.c".
+
+Test1 (test1.c) will accept a single command parameter naming a binary file will be used to create a simple EFI image with it's content as single executable section. 
