@@ -1,5 +1,5 @@
 #include "main.h"
-#include "/home/Data/EFI_Development/Sources/Generic/main.h"
+#include "./Helper/main.h"
 #include <stdio.h>
 
 int (main)(int n, char **p)
@@ -20,8 +20,11 @@ int (main)(int n, char **p)
 	1, //n sectors
 	0, //n directories
 	
-	&(SectorDesc[1]){ { sizeof(ImageSection), &ImageSection, 
-	*(__typeof__(M_abstr(SectorDesc).sName) *)p[1], sizeof(ImageSection), 0, IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_READ} }, //simple sector descriptors (single in the case)
+	&(SectorDesc[1]){ { sizeof(ImageSection), &ImageSection, //pass the file content as single section
+	
+	*(__typeof__(M_abstr(SectorDesc).sName) *)p[1], //use first 8 characters of the file name/path as section name
+	
+	sizeof(ImageSection), 0, IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_READ} }, //simple sector descriptors (single in the case)
 	
 	NULL, //pointer to image data directories - non in the case
 	
