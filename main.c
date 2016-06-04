@@ -17,7 +17,7 @@ static const size_t szBytesTillDataDirs = pCOFFHeadOffset + sizeof(uint32_t) + s
 static ImageSectionHeader dSectHeadTempl;
 
 
-static inline void allign(size_t *pszWhat, const size_t szAlligment)
+static inline void allign(size_t *pszWhat, const size_t szAlligment) //unused IRC
 {
 	const size_t tmp = *pszWhat % szAlligment;
 	
