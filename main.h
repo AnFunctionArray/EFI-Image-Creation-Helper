@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdbool.h> 
 
-static const uintptr_t pCOFFHeadOffset = 0x3C;
+#define M_pCOFFHeadOffset 0x3C
 
 static const char MZDosSign[2] = "MZ", COFFsign[4] = "PE\0\0";
 
@@ -49,7 +49,7 @@ typedef struct
 	uint16_t Characteristics;
 } COFFHead;
 
-static const uint16_t COFFMagic = 0x20B; //PE32+
+#define M_COFFMagic 0x20B //PE32+
 
 typedef struct
 {
