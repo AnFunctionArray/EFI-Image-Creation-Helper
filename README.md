@@ -19,4 +19,4 @@ C standard libraries.
 VLA, VM extensions.
 __typeof__ extension (for test1).
 
-You could use fasm to build the sections. For this purpose you would also need to find UEFI documentation and .inc files.
+You could use fasm to build the image sections. For this purpose you would also need to find UEFI documentation and .inc files.
